@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku — Mind Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tictactoe.css">
+    <link rel="stylesheet" href="css/sudoku.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-left">
+            <h1>🧠 MIND GAMES</h1>
+            <p class="tagline">Sharper Minds, Better Work.</p>
+        </div>
+        <div class="header-center">
+            <h2>Sudoku</h2>
+            <p>Fill the 9×9 grid using logic and number reasoning.</p>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon back-btn" onclick="window.location.href='index.html'">← Back to Hub</button>
+            <button class="btn-icon">⚙ Settings</button>
+            <button class="btn-icon">🔊 Sound</button>
+            <button class="btn-icon">❔ Help</button>
+        </div>
+    </header>
+
+    <div class="sudoku-container">
+
+        <!-- Difficulty Selector -->
+        <div class="difficulty-row">
+            <span class="label">Difficulty:</span>
+            <label class="radio-btn easy">
+                <input type="radio" name="diff" value="Easy" checked>
+                <span>Easy</span>
+            </label>
+            <label class="radio-btn medium">
+                <input type="radio" name="diff" value="Medium">
+                <span>Medium</span>
+            </label>
+            <label class="radio-btn hard">
+                <input type="radio" name="diff" value="Hard">
+                <span>Hard</span>
+            </label>
+        </div>
+
+        <!-- Status -->
+        <div id="status" class="status-msg">Fill in the empty cells (1–9).</div>
+
+        <!-- Daily Timer -->
+        <div class="timer-card">
+            <span class="timer-label">Daily play time remaining:</span>
+            <span id="timer" class="timer-value">15:00</span>
+        </div>
+
+        <!-- Sudoku Board -->
+        <div class="sudoku-board" id="board"></div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn-check" onclick="checkSolution()">✓ Check</button>
+            <button class="btn-hint" onclick="giveHint()">💡 Hint</button>
+            <button class="btn-clear" onclick="clearUser()">🧹 Clear</button>
+            <button class="btn-primary" onclick="newPuzzle()">🔄 New Puzzle</button>
+        </div>
+
+    </div>
+
+    <!-- Result Popup -->
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-card" id="popupCard">
+            <div class="popup-icon" id="popupIcon">🏆</div>
+            <h2 id="popupTitle">Puzzle Solved!</h2>
+            <p id="popupMessage">Great job!</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="closePopupAndNew()">🔄 Play Again</button>
+                <button class="btn-secondary" onclick="window.location.href='index.html'">← Back to Hub</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/sudoku.js"></script>
+</body>
+</html>
