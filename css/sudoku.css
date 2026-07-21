@@ -1,0 +1,132 @@
+/* =====================================================
+   SUDOKU — Game Page Styles
+   ===================================================== */
+
+.sudoku-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ---------- Sudoku Board ---------- */
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 42px);
+    gap: 0;
+    background: var(--text-dark);
+    padding: 4px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.sudoku-cell {
+    width: 42px;
+    height: 42px;
+    background: white;
+    border: 1px solid #C8D3E8;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--accent-blue);
+    outline: none;
+    transition: 0.15s;
+}
+
+.sudoku-cell:focus {
+    background: #DDE7F7;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.3);
+}
+
+/* Preset (given) numbers - not editable */
+.sudoku-cell.given {
+    background: #E8ECF5;
+    color: var(--text-dark);
+    cursor: not-allowed;
+}
+
+/* Hint cells */
+.sudoku-cell.hint {
+    color: var(--accent-purple);
+    background: #F3F0FA;
+}
+
+/* Thicker borders every 3rd column */
+.sudoku-cell:nth-child(3n) {
+    border-right: 3px solid var(--text-dark);
+}
+
+.sudoku-cell:nth-child(9n) {
+    border-right: 1px solid #C8D3E8;
+}
+
+/* Thicker borders every 3rd row */
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 3px solid var(--text-dark);
+}
+
+/* ---------- Controls ---------- */
+.sudoku-container .controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.btn-check {
+    background: var(--accent-mint);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-check:hover { background: #25A385; }
+
+.btn-hint {
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-hint:hover { background: #7568CF; }
+
+.btn-clear {
+    background: var(--text-muted);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-clear:hover { background: #556180; }
+
+/* ---------- Mobile Responsive ---------- */
+@media (max-width: 500px) {
+    .sudoku-board {
+        grid-template-columns: repeat(9, 34px);
+    }
+    .sudoku-cell {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+}
