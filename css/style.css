@@ -1,0 +1,240 @@
+/* =====================================================
+   MIND GAMES — Web Edition
+   Matching the Python CustomTkinter design
+   ===================================================== */
+
+:root {
+    --bg-main: #EAF2FB;
+    --bg-card: #FFFFFF;
+    --bg-card-hl: #E8FDF5;
+    --accent-mint: #2FBF9B;
+    --accent-blue: #4A6CF7;
+    --accent-purple: #8B7DE8;
+    --text-dark: #1E2A4A;
+    --text-muted: #6B7A99;
+    --badge-easy: #2FBF9B;
+    --badge-med: #E8A93B;
+    --badge-hard: #E85D5D;
+    --banner-bg: #FFF6E0;
+    --banner-border: #F4C95D;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-left h1 {
+    font-size: 26px;
+    color: var(--text-dark);
+}
+
+.tagline {
+    color: var(--accent-mint);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-center h2 {
+    font-size: 22px;
+    color: var(--text-dark);
+}
+
+.header-center p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.header-right {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: white;
+    color: var(--text-dark);
+    border: 1px solid #C8D3E8;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-icon:hover {
+    background: #E5ECF7;
+}
+
+/* ---------- WORK FIRST BANNER ---------- */
+.banner {
+    background: var(--banner-bg);
+    border: 1px solid var(--banner-border);
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px;
+    margin: 15px 25px;
+    color: #8A6A00;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ---------- GAME GRID ---------- */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 10px 25px;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 2px solid #DAE2EF;
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card.available {
+    background: var(--bg-card-hl);
+    border-color: var(--accent-mint);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(30, 42, 74, 0.12);
+}
+
+.status {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--accent-mint);
+}
+
+.status.soon {
+    color: var(--accent-purple);
+}
+
+.card img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin: 15px 0 10px 0;
+    filter: drop-shadow(3px 5px 6px rgba(40, 50, 80, 0.25));
+}
+
+.card.coming-soon img {
+    opacity: 0.5;
+}
+
+.card h2 {
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* ---------- BADGES ---------- */
+.badge {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.badge.easy   { color: var(--badge-easy); }
+.badge.medium { color: var(--badge-med); }
+.badge.hard   { color: var(--badge-hard); }
+
+/* ---------- PLAY BUTTON ---------- */
+.btn-play {
+    background: var(--accent-mint);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.btn-play:hover {
+    background: #25A385;
+}
+
+.btn-play.purple {
+    background: var(--accent-purple);
+}
+
+.btn-play.purple:hover {
+    background: #7568CF;
+}
+
+/* ---------- WELLNESS FOOTER ---------- */
+.wellness-footer {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 25px 8px 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-dark);
+}
+
+.program-title {
+    text-align: center;
+    color: var(--accent-purple);
+    font-style: italic;
+    font-size: 12px;
+    padding: 8px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .game-grid { grid-template-columns: repeat(2, 1fr); }
+    .app-header { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 600px) {
+    .game-grid { grid-template-columns: 1fr; }
+}

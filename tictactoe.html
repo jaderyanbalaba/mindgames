@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe — Mind Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tictactoe.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-left">
+            <h1>🧠 MIND GAMES</h1>
+            <p class="tagline">Sharper Minds, Better Work.</p>
+        </div>
+        <div class="header-center">
+            <h2>Tic Tac Toe</h2>
+            <p>Quick strategy game — outsmart the AI in a 3×3 grid.</p>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon back-btn" onclick="window.location.href='index.html'">← Back to Hub</button>
+            <button class="btn-icon">⚙ Settings</button>
+            <button class="btn-icon">🔊 Sound</button>
+            <button class="btn-icon">❔ Help</button>
+        </div>
+    </header>
+
+    <div class="ttt-container">
+
+        <!-- Difficulty Selector -->
+        <div class="difficulty-row">
+            <span class="label">Opponent:</span>
+            <label class="radio-btn easy">
+                <input type="radio" name="mode" value="Easy" checked>
+                <span>Easy</span>
+            </label>
+            <label class="radio-btn medium">
+                <input type="radio" name="mode" value="Medium">
+                <span>Medium</span>
+            </label>
+            <label class="radio-btn hard">
+                <input type="radio" name="mode" value="Hard">
+                <span>Hard</span>
+            </label>
+            <label class="radio-btn pvp">
+                <input type="radio" name="mode" value="PvP">
+                <span>PvP</span>
+            </label>
+        </div>
+
+        <!-- Status -->
+        <div id="status" class="status-msg">Your turn (X)</div>
+
+        <!-- Daily Timer -->
+        <div class="timer-card">
+            <span class="timer-label">Daily play time remaining:</span>
+            <span id="timer" class="timer-value">15:00</span>
+        </div>
+
+        <!-- Board -->
+        <div class="board" id="board">
+            <button class="cell" data-idx="0"></button>
+            <button class="cell" data-idx="1"></button>
+            <button class="cell" data-idx="2"></button>
+            <button class="cell" data-idx="3"></button>
+            <button class="cell" data-idx="4"></button>
+            <button class="cell" data-idx="5"></button>
+            <button class="cell" data-idx="6"></button>
+            <button class="cell" data-idx="7"></button>
+            <button class="cell" data-idx="8"></button>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn-primary" onclick="resetGame()">🔄 New Game</button>
+        </div>
+
+    </div>
+
+    <!-- Result Popup -->
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-card" id="popupCard">
+            <div class="popup-icon" id="popupIcon">🏆</div>
+            <h2 id="popupTitle">Congratulations!</h2>
+            <p id="popupMessage">You won!</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="closePopupAndReset()">🔄 Play Again</button>
+                <button class="btn-secondary" onclick="window.location.href='index.html'">← Back to Hub</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/tictactoe.js"></script>
+</body>
+</html>

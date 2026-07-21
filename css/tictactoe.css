@@ -1,0 +1,230 @@
+/* =====================================================
+   TIC TAC TOE — Game Page Styles
+   ===================================================== */
+
+.ttt-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ---------- Difficulty Row ---------- */
+.difficulty-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.label {
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-right: 8px;
+}
+
+.radio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 6px 12px;
+    background: white;
+    border: 2px solid #C8D3E8;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.radio-btn input {
+    accent-color: var(--accent-blue);
+}
+
+.radio-btn.easy   { color: var(--badge-easy); }
+.radio-btn.medium { color: var(--badge-med); }
+.radio-btn.hard   { color: var(--badge-hard); }
+.radio-btn.pvp    { color: var(--accent-blue); }
+
+.radio-btn:has(input:checked) {
+    background: #EEF3FF;
+    border-color: var(--accent-blue);
+}
+
+/* ---------- Status Message ---------- */
+.status-msg {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--accent-mint);
+    margin: 10px 0;
+}
+
+/* ---------- Daily Timer ---------- */
+.timer-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #C8D3E8;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin: 10px 0;
+}
+
+.timer-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-muted);
+}
+
+.timer-value {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--accent-mint);
+}
+
+/* ---------- Board ---------- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    gap: 8px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 90px;
+    height: 90px;
+    background: white;
+    border: 2px solid #C8D3E8;
+    border-radius: 12px;
+    font-size: 42px;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.cell:hover:not(:disabled) {
+    background: #DDE7F7;
+    transform: scale(1.05);
+}
+
+.cell.x-mark { color: var(--accent-blue); }
+.cell.o-mark { color: var(--accent-mint); }
+
+.cell:disabled {
+    cursor: not-allowed;
+}
+
+/* ---------- Controls ---------- */
+.controls {
+    margin: 15px 0;
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #3A56D1;
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--text-dark);
+    border: 1px solid #C8D3E8;
+    padding: 12px 28px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #E5ECF7;
+}
+
+.back-btn {
+    background: var(--accent-blue) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.back-btn:hover {
+    background: #3A56D1 !important;
+}
+
+/* ---------- Popup ---------- */
+.popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 42, 74, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.popup-overlay.hidden {
+    display: none;
+}
+
+.popup-card {
+    background: #E8FDF5;
+    border: 2px solid var(--accent-mint);
+    border-radius: 20px;
+    padding: 30px 40px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.popup-card.loss {
+    background: #FFF1F1;
+    border-color: var(--badge-hard);
+}
+
+.popup-card.draw {
+    background: #EEF3FF;
+    border-color: var(--accent-blue);
+}
+
+.popup-icon {
+    font-size: 62px;
+    margin-bottom: 5px;
+}
+
+.popup-card h2 {
+    font-size: 26px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.popup-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}

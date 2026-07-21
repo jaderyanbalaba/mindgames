@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Games</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-left">
+            <h1>🧠 MIND GAMES</h1>
+            <p class="tagline">Sharper Minds, Better Work.</p>
+        </div>
+        <div class="header-center">
+            <h2>Welcome to Mind Games</h2>
+            <p>Choose a game for a quick mental refresh</p>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon">⚙ Settings</button>
+            <button class="btn-icon">🔊 Sound</button>
+            <button class="btn-icon">❔ Help</button>
+        </div>
+    </header>
+
+    <div class="banner">
+        🔔 <strong>Work First</strong> — Play only during genuine idle time or official breaks.
+    </div>
+
+    <main class="game-grid">
+
+        <!-- Tic Tac Toe -->
+        <div class="card available">
+            <span class="status">✓ Available</span>
+            <img src="assets/tic_tac_toe.png" alt="Tic Tac Toe">
+            <h2>Tic Tac Toe</h2>
+            <p>Strategy and logical thinking</p>
+            <span class="badge easy">▥ Easy</span>
+            <button class="btn-play" onclick="window.location.href='tictactoe.html'">PLAY</button>
+        </div>
+
+        <!-- Sudoku -->
+        <div class="card available">
+            <span class="status">✓ Available</span>
+            <img src="assets/sudoku.png" alt="Sudoku">
+            <h2>Sudoku</h2>
+            <p>Number and reasoning challenge</p>
+            <span class="badge medium">▥ Medium</span>
+            <button class="btn-play" onclick="window.location.href='sudoku.html'">PLAY</button>
+        </div>
+
+        <!-- Crossword -->
+        <div class="card coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <img src="assets/crossword.png" alt="Crossword">
+            <h2>Crossword</h2>
+            <p>Vocabulary and general knowledge</p>
+            <span class="badge medium">▥ Medium</span>
+            <button class="btn-play purple" onclick="alert('Coming Soon!')">PLAY</button>
+        </div>
+
+        <!-- Word Search -->
+        <div class="card coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <img src="assets/word_search.png" alt="Word Search">
+            <h2>Word Search</h2>
+            <p>Focus and visual recognition</p>
+            <span class="badge easy">▥ Easy</span>
+            <button class="btn-play purple" onclick="alert('Coming Soon!')">PLAY</button>
+        </div>
+
+        <!-- Memory Match -->
+        <div class="card coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <img src="assets/memory_match.png" alt="Memory Match">
+            <h2>Memory Match</h2>
+            <p>Memory and concentration</p>
+            <span class="badge easy">▥ Easy</span>
+            <button class="btn-play purple" onclick="alert('Coming Soon!')">PLAY</button>
+        </div>
+
+        <!-- Logic Puzzle -->
+        <div class="card coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <img src="assets/logic_puzzle.png" alt="Logic Puzzle">
+            <h2>Logic Puzzle</h2>
+            <p>Critical thinking and problem-solving</p>
+            <span class="badge hard">▥ Hard</span>
+            <button class="btn-play purple" onclick="alert('Coming Soon!')">PLAY</button>
+        </div>
+
+    </main>
+
+    <footer class="wellness-footer">
+        <span>⏱ Keep play sessions short: 5–10 minutes</span>
+        <span>💻 Return to work when a task becomes available</span>
+        <span>🌿 Use mind games for a healthy cognitive refresh</span>
+    </footer>
+
+    <p class="program-title">🌸 Mental Wellness Games Program</p>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
