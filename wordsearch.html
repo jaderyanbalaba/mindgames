@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search - Mind Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tictactoe.css">
+    <link rel="stylesheet" href="css/wordsearch.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <h1>MIND GAMES</h1>
+            <p class="tagline">Sharper Minds, Better Work.</p>
+        </div>
+        <div class="header-center">
+            <h2>Word Search</h2>
+            <p>LEAR and PETC edition - a new themed board every day.</p>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon back-btn" onclick="window.location.href='index.html'">Back to Hub</button>
+            <button class="btn-icon">Settings</button>
+            <button class="btn-icon">Sound</button>
+            <button class="btn-icon" id="helpBtn">Help</button>
+        </div>
+    </header>
+
+    <div class="ws-container">
+        <div class="theme-banner">
+            <span class="theme-label">Today's Theme:</span>
+            <span id="themeName" class="theme-name">-</span>
+            <span class="theme-count" id="themeCount"></span>
+        </div>
+
+        <div id="status" class="status-msg">Find every word in the list by dragging across the grid.</div>
+
+        <div class="timer-card">
+            <span class="timer-label">Daily play time remaining:</span>
+            <span id="timer" class="timer-value">15:00</span>
+        </div>
+
+        <div class="ws-layout">
+            <div class="grid-wrap">
+                <div class="ws-grid" id="grid"></div>
+                <div class="controls">
+                    <button class="btn-hint" onclick="giveHint()">Reveal Word</button>
+                    <button class="btn-clear" onclick="clearProgress()">Clear</button>
+                    <button class="btn-shuffle" onclick="nextPuzzle()">New Puzzle</button>
+                </div>
+            </div>
+
+            <div class="words-panel">
+                <h3>Find These Words</h3>
+                <ul id="wordList" class="word-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-card" id="popupCard">
+            <div class="popup-icon" id="popupIcon">Trophy</div>
+            <h2 id="popupTitle">All Words Found!</h2>
+            <p id="popupMessage">Great job! You found every word correctly.</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="nextPuzzleFromPopup()">Try Another Theme</button>
+                <button class="btn-secondary" onclick="closePopupAndReset()">Play Again</button>
+                <button class="btn-secondary" onclick="window.location.href='index.html'">Back to Hub</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpPopup" class="popup-overlay hidden">
+        <div class="popup-card">
+            <div class="popup-icon">Help</div>
+            <h2>How to Play</h2>
+            <p style="text-align:left;">Click and drag from the first letter of a word to its last letter (words can go across, down, or diagonally, forwards or backwards). Release to check it - correct words turn green and get crossed off the list. Use Reveal Word if you get stuck, Clear to reset your progress, or New Puzzle to switch to a different themed word set. There are 4 rotating themes: Wiring Harness Basics, Lear and PETC Company, Programs and Acronyms, and Process and Documentation - a new one is featured each day!</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="document.getElementById('helpPopup').classList.add('hidden')">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/wordsearch_data.js"></script>
+    <script src="js/wordsearch.js"></script>
+</body>
+</html>
