@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/sudoku.css">
 </head>
 <body>
-
     <header class="app-header">
         <div class="header-left">
             <h1>🧠 MIND GAMES</h1>
@@ -17,7 +16,7 @@
         </div>
         <div class="header-center">
             <h2>Sudoku</h2>
-            <p>Fill the 9×9 grid using logic and number reasoning.</p>
+            <p>Fill the 9×9 grid using logic and number reasoning — now styled with the LEAR-PETC key.</p>
         </div>
         <div class="header-right">
             <button class="btn-icon back-btn" onclick="window.location.href='index.html'">← Back to Hub</button>
@@ -26,9 +25,20 @@
             <button class="btn-icon">❔ Help</button>
         </div>
     </header>
-
     <div class="sudoku-container">
-
+        <!-- LEAR-PETC Key Legend -->
+        <div class="lear-legend">
+            <span class="legend-title">LEAR-PETC Key:</span>
+            <span class="legend-item"><span class="legend-num">1</span>=<span class="letter-red">L</span></span>
+            <span class="legend-item"><span class="legend-num">2</span>=<span class="letter-red">E</span></span>
+            <span class="legend-item"><span class="legend-num">3</span>=<span class="letter-red">A</span></span>
+            <span class="legend-item"><span class="legend-num">4</span>=<span class="letter-red">R</span></span>
+            <span class="legend-item"><span class="legend-num">5</span>=<span class="letter-neutral">-</span></span>
+            <span class="legend-item"><span class="legend-num">6</span>=<span class="letter-blue">P</span></span>
+            <span class="legend-item"><span class="legend-num">7</span>=<span class="letter-blue">E</span></span>
+            <span class="legend-item"><span class="legend-num">8</span>=<span class="letter-blue">T</span></span>
+            <span class="legend-item"><span class="legend-num">9</span>=<span class="letter-blue">C</span></span>
+        </div>
         <!-- Difficulty Selector -->
         <div class="difficulty-row">
             <span class="label">Difficulty:</span>
@@ -45,19 +55,15 @@
                 <span>Hard</span>
             </label>
         </div>
-
         <!-- Status -->
-        <div id="status" class="status-msg">Fill in the empty cells (1–9).</div>
-
+        <div id="status" class="status-msg">Select a cell and press a number key (1–9) to place its LEAR-PETC letter.</div>
         <!-- Daily Timer -->
         <div class="timer-card">
             <span class="timer-label">Daily play time remaining:</span>
             <span id="timer" class="timer-value">15:00</span>
         </div>
-
         <!-- Sudoku Board -->
         <div class="sudoku-board" id="board"></div>
-
         <!-- Controls -->
         <div class="controls">
             <button class="btn-check" onclick="checkSolution()">✓ Check</button>
@@ -65,9 +71,7 @@
             <button class="btn-clear" onclick="clearUser()">🧹 Clear</button>
             <button class="btn-primary" onclick="newPuzzle()">🔄 New Puzzle</button>
         </div>
-
     </div>
-
     <!-- Result Popup -->
     <div id="popup" class="popup-overlay hidden">
         <div class="popup-card" id="popupCard">
@@ -80,7 +84,6 @@
             </div>
         </div>
     </div>
-
     <script src="js/sudoku.js"></script>
 </body>
 </html>
