@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossword — Mind Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tictactoe.css">
+    <link rel="stylesheet" href="css/crossword.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <h1>🧠 MIND GAMES</h1>
+            <p class="tagline">Sharper Minds, Better Work.</p>
+        </div>
+        <div class="header-center">
+            <h2>Crossword</h2>
+            <p>LEAR &amp; PETC edition — wiring harness &amp; company terms.</p>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon back-btn" onclick="window.location.href='index.html'">← Back to Hub</button>
+            <button class="btn-icon">⚙ Settings</button>
+            <button class="btn-icon">🔊 Sound</button>
+            <button class="btn-icon" id="helpBtn">❔ Help</button>
+        </div>
+    </header>
+
+    <div class="crossword-container">
+        <!-- Status -->
+        <div id="status" class="status-msg">Fill in the grid using the clues below.</div>
+
+        <!-- Daily Timer -->
+        <div class="timer-card">
+            <span class="timer-label">Daily play time remaining:</span>
+            <span id="timer" class="timer-value">15:00</span>
+        </div>
+
+        <div class="crossword-layout">
+            <!-- Grid -->
+            <div class="grid-wrap">
+                <div class="crossword-grid" id="grid"></div>
+                <div class="controls">
+                    <button class="btn-check" onclick="checkSolution()">✓ Check</button>
+                    <button class="btn-hint" onclick="giveHint()">💡 Reveal Letter</button>
+                    <button class="btn-clear" onclick="clearUser()">🧹 Clear</button>
+                </div>
+            </div>
+
+            <!-- Clues -->
+            <div class="clues-panel">
+                <div class="clue-group">
+                    <h3>Across</h3>
+                    <ul id="acrossClues" class="clue-list"></ul>
+                </div>
+                <div class="clue-group">
+                    <h3>Down</h3>
+                    <ul id="downClues" class="clue-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Popup -->
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-card" id="popupCard">
+            <div class="popup-icon" id="popupIcon">🏆</div>
+            <h2 id="popupTitle">Puzzle Solved!</h2>
+            <p id="popupMessage">Great job! You filled every word correctly.</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="closePopupAndReset()">🔄 Play Again</button>
+                <button class="btn-secondary" onclick="window.location.href='index.html'">← Back to Hub</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Popup -->
+    <div id="helpPopup" class="popup-overlay hidden">
+        <div class="popup-card">
+            <div class="popup-icon">❔</div>
+            <h2>How to Play</h2>
+            <p style="text-align:left;">Click a cell to select it (click again to switch Across/Down). Type letters to fill the grid — the cursor moves automatically. Use the clue list to jump to any word. Use <strong>Check</strong> to verify your answers, <strong>Reveal Letter</strong> for a hint, or <strong>Clear</strong> to start the grid over. All words relate to Lear / PETC / wiring harness engineering!</p>
+            <div class="popup-buttons">
+                <button class="btn-primary" onclick="document.getElementById('helpPopup').classList.add('hidden')">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/crossword.js"></script>
+</body>
+</html>
