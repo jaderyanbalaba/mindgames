@@ -1,7 +1,27 @@
 /* =====================================================
    SUDOKU — JavaScript Game Logic
+   LEAR-PETC Letter Edition — Mind Games
    Converted from your Python Mind Games
    ===================================================== */
+
+// ---------- LEAR-PETC LETTER KEY ----------
+// Internally the puzzle is still solved/validated using numbers 1-9.
+// Visually, every number is displayed using its LEAR-PETC letter.
+const LEAR_PETC_MAP = {
+    1: "L",
+    2: "E",
+    3: "A",
+    4: "R",
+    5: "-",
+    6: "P",
+    7: "E",
+    8: "T",
+    9: "C"
+};
+
+function numberToLetter(n) {
+    return LEAR_PETC_MAP[n] || "";
+}
 
 // ---------- PUZZLE BANK (from your Python code) ----------
 const SUDOKU_BANK = {
@@ -89,11 +109,35 @@ function buildBoard() {
             input.dataset.row = r;
             input.dataset.col = c;
 
-            // Only allow digits 1–9
+            // Only allow digits 1-9 to be typed, but immediately
+            // display the corresponding LEAR-PETC letter instead.
             input.addEventListener("input", (e) => {
-                const val = e.target.value;
-                if (!/^[1-9]$/.test(val)) {
+                const raw = e.target.value.trim();
+                const digitMatch = raw.match(/[1-9]/);
+                if (!digitMatch) {
                     e.target.value = "";
+                    delete e.target.dataset.num;
+                    return;
+                }
+                const num = digitMatch[0];
+                e.target.dataset.num = num;       // store the real number
+                e.target.value = numberToLetter(parseInt(num, 10)); // show the letter
+                e.target.classList.remove("hint");
+            });
+
+            // Also allow keydown for number keys directly (nicer UX),
+            // preventing the raw digit from ever flashing on screen.
+            input.addEventListener("keydown", (e) => {
+                if (e.key >= "1" && e.key <= "9") {
+                    e.preventDefault();
+                    e.target.dataset.num = e.key;
+                    e.target.value = numberToLetter(parseInt(e.key, 10));
+                    e.target.classList.remove("hint");
+                } else if (e.key === "Backspace" || e.key === "Delete") {
+                    e.preventDefault();
+                    e.target.value = "";
+                    delete e.target.dataset.num;
+                    e.target.classList.remove("hint");
                 }
             });
 
@@ -106,10 +150,8 @@ function buildBoard() {
 function newPuzzle() {
     const diffRadio = document.querySelector('input[name="diff"]:checked');
     difficulty = diffRadio.value;
-
     const bank = SUDOKU_BANK[difficulty];
     puzzle = JSON.parse(JSON.stringify(bank[Math.floor(Math.random() * bank.length)]));
-
     given = puzzle.map(row => row.map(v => v !== 0));
 
     // Solve for hints/checking
@@ -120,26 +162,26 @@ function newPuzzle() {
         solutionBoard = null;
     }
 
-    // Fill in the cells
+    // Fill in the cells, displaying LEAR-PETC letters for the givens
     const cells = document.querySelectorAll(".sudoku-cell");
     cells.forEach(cell => {
         const r = parseInt(cell.dataset.row);
         const c = parseInt(cell.dataset.col);
         const val = puzzle[r][c];
-
         cell.classList.remove("given", "hint");
         cell.disabled = false;
         cell.value = "";
-
+        delete cell.dataset.num;
         if (val !== 0) {
-            cell.value = val;
+            cell.dataset.num = String(val);
+            cell.value = numberToLetter(val);
             cell.classList.add("given");
             cell.disabled = true;
         }
     });
 
     startTime = Date.now();
-    statusEl.textContent = `New ${difficulty} puzzle — good luck!`;
+    statusEl.textContent = `New ${difficulty} puzzle — good luck! Numbers are shown using the LEAR-PETC key.`;
     statusEl.style.color = "#4A6CF7";
 }
 
@@ -151,6 +193,7 @@ function clearUser() {
         const c = parseInt(cell.dataset.col);
         if (!given[r][c]) {
             cell.value = "";
+            delete cell.dataset.num;
             cell.classList.remove("hint");
         }
     });
@@ -158,20 +201,20 @@ function clearUser() {
     statusEl.style.color = "#6B7A99";
 }
 
-// ---------- READ BOARD ----------
+// ---------- READ BOARD (uses the real numbers, not the letters) ----------
 function readBoard() {
     const b = Array.from({ length: 9 }, () => Array(9).fill(0));
     const cells = document.querySelectorAll(".sudoku-cell");
     for (const cell of cells) {
         const r = parseInt(cell.dataset.row);
         const c = parseInt(cell.dataset.col);
-        const v = cell.value.trim();
-        if (v === "") {
+        const numStr = cell.dataset.num;
+        if (!numStr) {
             b[r][c] = 0;
-        } else if (/^[1-9]$/.test(v)) {
-            b[r][c] = parseInt(v);
+        } else if (/^[1-9]$/.test(numStr)) {
+            b[r][c] = parseInt(numStr, 10);
         } else {
-            return { board: null, err: `Invalid entry at row ${r+1}, col ${c+1}` };
+            return { board: null, err: `Invalid entry at row ${r + 1}, col ${c + 1}` };
         }
     }
     return { board: b, err: null };
@@ -214,7 +257,7 @@ function giveHint() {
     cells.forEach(cell => {
         const r = parseInt(cell.dataset.row);
         const c = parseInt(cell.dataset.col);
-        if (!given[r][c] && cell.value.trim() === "") {
+        if (!given[r][c] && !cell.dataset.num) {
             empties.push({ r, c, cell });
         }
     });
@@ -224,29 +267,29 @@ function giveHint() {
         return;
     }
     const pick = empties[Math.floor(Math.random() * empties.length)];
-    pick.cell.value = solutionBoard[pick.r][pick.c];
+    const solutionNum = solutionBoard[pick.r][pick.c];
+    pick.cell.dataset.num = String(solutionNum);
+    pick.cell.value = numberToLetter(solutionNum);
     pick.cell.classList.add("hint");
-    statusEl.textContent = `Hint placed at row ${pick.r+1}, col ${pick.c+1}.`;
+    statusEl.textContent = `Hint placed at row ${pick.r + 1}, col ${pick.c + 1}.`;
     statusEl.style.color = "#8B7DE8";
 }
 
 // ---------- VALIDATION ----------
 function validFull(b) {
     for (let i = 0; i < 9; i++) {
-        const row = [...b[i]].sort((a,b) => a-b);
-        const col = b.map(r => r[i]).sort((a,b) => a-b);
+        const row = [...b[i]].sort((a, b) => a - b);
+        const col = b.map(r => r[i]).sort((a, b) => a - b);
         for (let n = 0; n < 9; n++) {
-            if (row[n] !== n+1 || col[n] !== n+1) return false;
+            if (row[n] !== n + 1 || col[n] !== n + 1) return false;
         }
     }
     for (let br = 0; br < 9; br += 3) {
         for (let bc = 0; bc < 9; bc += 3) {
             const box = [];
-            for (let r = br; r < br+3; r++)
-                for (let c = bc; c < bc+3; c++)
-                    box.push(b[r][c]);
-            box.sort((a,b) => a-b);
-            for (let n = 0; n < 9; n++) if (box[n] !== n+1) return false;
+            for (let r = br; r < br + 3; r++) for (let c = bc; c < bc + 3; c++) box.push(b[r][c]);
+            box.sort((a, b) => a - b);
+            for (let n = 0; n < 9; n++) if (box[n] !== n + 1) return false;
         }
     }
     return true;
@@ -276,11 +319,9 @@ function canPlace(b, r, c, n) {
         if (b[r][i] === n) return false;
         if (b[i][c] === n) return false;
     }
-    const br = Math.floor(r/3) * 3;
-    const bc = Math.floor(c/3) * 3;
-    for (let i = br; i < br+3; i++)
-        for (let j = bc; j < bc+3; j++)
-            if (b[i][j] === n) return false;
+    const br = Math.floor(r / 3) * 3;
+    const bc = Math.floor(c / 3) * 3;
+    for (let i = br; i < br + 3; i++) for (let j = bc; j < bc + 3; j++) if (b[i][j] === n) return false;
     return true;
 }
 
@@ -304,31 +345,25 @@ document.querySelectorAll('input[name="diff"]').forEach(radio => {
 // ---------- DAILY TIMER ----------
 let remainingSeconds = 15 * 60;
 const timerEl = document.getElementById("timer");
-
 const today = new Date().toDateString();
 const saved = JSON.parse(localStorage.getItem("sudoku_daily") || "{}");
 if (saved.date === today) {
     remainingSeconds = Math.max(0, saved.remaining);
 }
-
 function updateTimer() {
     const mins = Math.floor(remainingSeconds / 60);
     const secs = remainingSeconds % 60;
-    timerEl.textContent = `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+    timerEl.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
     if (remainingSeconds <= 60) timerEl.style.color = "#E85D5D";
     else if (remainingSeconds <= 300) timerEl.style.color = "#E8A93B";
     else timerEl.style.color = "#2FBF9B";
 }
 updateTimer();
-
 setInterval(() => {
     if (remainingSeconds > 0) {
         remainingSeconds--;
         updateTimer();
-        localStorage.setItem("sudoku_daily", JSON.stringify({
-            date: today,
-            remaining: remainingSeconds
-        }));
+        localStorage.setItem("sudoku_daily", JSON.stringify({ date: today, remaining: remainingSeconds }));
         if (remainingSeconds === 0) {
             alert("Daily 15-minute allowance for Sudoku has been used.\n\nIt will renew automatically tomorrow.");
             window.location.href = "index.html";
@@ -339,5 +374,4 @@ setInterval(() => {
 // ---------- INIT ----------
 buildBoard();
 newPuzzle();
-
-console.log("Sudoku loaded ✓");
+console.log("Sudoku (LEAR-PETC letter edition) loaded ✓");
